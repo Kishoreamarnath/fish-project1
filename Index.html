@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEC Aquarium Monitoring</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+        }
+
+        /* Centered Container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Login Box */
+        .login-box {
+            width: 100%;
+            max-width: 350px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-box h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #dbdbdb;
+            border-radius: 6px;
+            background-color: #fafafa;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #3897f0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-box button:hover {
+            background-color: #287dc9;
+        }
+  /* Social Login Buttons */
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .social-login button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .facebook-btn {
+            background-color: #4267B2;
+            color: white;
+        }
+
+        .google-btn {
+            background-color: #DB4437;
+            color: white;
+        }
+
+        .phone-btn {
+            background-color: #34A853;
+            color: white;
+        }
+
+        .social-login button i {
+            font-size: 18px;
+        }
+
+        .create-account {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .create-account button {
+            background: none;
+            border: none;
+            color: #3897f0;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .create-account button:hover {
+            text-decoration: underline;
+        }
+
+        /* App Page */
+        .app-page {
+            display: none;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #fff;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 12px;
+            margin: 15px auto;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            max-width: 350px;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .card button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #3897f0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .card button:hover {
+            background-color: #287dc9;
+        }
+
+        .card input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #dbdbdb;
+            border-radius: 6px;
+            background-color: #fafafa;
+        }
+      
+
+        .output {
+            font-size: 14px;
+            color: #555;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+</head>
+<body>
+                  <!-- Login Page -->
+    <div class="container login-container">
+        <div class="login-box">
+            <h1>Login</h1>
+            <input type="text" id="username" placeholder="Username ">
+            <input type="password" id="password" placeholder="Password ">
+            <button onclick="login()">Log In</button>
+ <button class="facebook-btn"><i class="fab fa-facebook-f"></i> Login with Facebook</button>
+                <button class="google-btn"><i class="fab fa-google"></i> Login with Google</button>
+                <button class="phone-btn"><i class="fas fa-phone"></i> Login with Phone Number</button>
+           <span>Don't have an account?</span>
+      <button onclick="showRegister()">Create Account</button>
+      </div>
+    </div>
+
+    <!-- App Page -->
+    <div class="app-page">
+        <div class="header">JEC Aquarium Monitoring</div>
+
+        <!-- Feeding Scheduler -->
+        <div class="card">
+            <h3>Feeding Scheduler</h3>
+            <p>Set feeding times for the day:</p>
+            <label for="time1">Feeding Time 1:</label>
+            <input type="time" id="time1">
+            <label for="time2">Feeding Time 2:</label>
+            <input type="time" id="time2">
+            <label for="time3">Feeding Time 3:</label>
+            <input type="time" id="time3">
+            <button onclick="scheduleFeedings()">Set Feeding Times</button>
+            <button onclick="manualFeed()">Manual Feed</button>
+            <p class="output" id="feeding-output"></p>
+        </div>
+
+        <!-- pH Level Monitor -->
+        <div class="card">
+            <h3>pH Level Monitor</h3>
+            <p>Enter the current pH level:</p>
+            <input type="number" step="0.1" id="ph-level" placeholder="e.g., 7.5">
+            <button onclick="checkPHLevel()">Check pH Level</button>
+            <p class="output" id="ph-output"></p>
+        </div>
+
+        <!-- Chlorine Level Monitor -->
+        <div class="card">
+            <h3>Chlorine Level Monitor</h3>
+            <p>Enter the chlorine level (ppm):</p>
+            <input type="number" step="0.1" id="chlorine-level" placeholder="e.g., 1.0">
+            <button onclick="checkChlorineLevel()">Check Chlorine Level</button>
+            <p class="output" id="chlorine-output"></p>
+        </div>
+    </div>
+
+    <script>
+        // Default users
+        const users = {
+            "admin": "admin123",
+            "user": "user123"
+        };
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (users[username] && users[username] === password) {
+                document.querySelector('.login-container').style.display = 'none';
+                document.querySelector('.app-page').style.display = 'block';
+            } else {
+                alert('Invalid username or password!');
+            }
+        }
+
+        function scheduleFeedings() {
+            const time1 = document.getElementById('time1').value;
+            const time2 = document.getElementById('time2').value;
+            const time3 = document.getElementById('time3').value;
+            const output = document.getElementById('feeding-output');
+
+            if (time1 && time2 && time3) {
+                output.textContent = `Feeding times set to: ${time1}, ${time2}, ${time3}.`;
+            } else {
+                output.textContent = 'Please set all three feeding times.';
+            }
+        }
+
+        function manualFeed() {
+            document.getElementById('feeding-output').textContent = 'Manual feed initiated successfully!';
+        }
+
+        function checkPHLevel() {
+            const phLevel = parseFloat(document.getElementById('ph-level').value);
+            const output = document.getElementById('ph-output');
+
+            if (!isNaN(phLevel)) {
+                if (phLevel < 6.5) {
+                    output.textContent = 'pH is too low! Add a buffer.';
+                } else if (phLevel > 8.5) {
+                    output.textContent = 'pH is too high! Adjust immediately.';
+                } else {
+                    output.textContent = 'pH level is optimal.';
+                }
+            } else {
+                output.textContent = 'Please enter a valid pH level.';
+            }
+        }
+
+        function checkChlorineLevel() {
+            const chlorineLevel = parseFloat(document.getElementById('chlorine-level').value);
+            const output = document.getElementById('chlorine-output');
+
+            if (!isNaN(chlorineLevel)) {
+                if (chlorineLevel > 1.5) {
+                    output.textContent = 'Chlorine level is too high! Adjust immediately.';
+                } else {
+                    output.textContent = 'Chlorine level is within the safe range.';
+                }
+            } else {
+                output.textContent = 'Please enter a valid chlorine level.';
+            }
+        }
+    </script>
+</body>
+</html>
